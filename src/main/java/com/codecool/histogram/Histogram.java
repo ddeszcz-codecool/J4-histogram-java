@@ -84,7 +84,12 @@ public class Histogram {
      *      `V' = (V - min) * 100 / (max - min)`
      */
     public void normalizeValues() {
-        // TODO: Implement normalization method
+        int min = getMin();
+        int max = getMax();
+        for (Range range : histogram.keySet()) {
+            Integer count = histogram.get(range);
+            histogram.put(range, (count - min) * 100 / (max - min));
+        }
     }
 
     /**
@@ -102,5 +107,25 @@ public class Histogram {
         }
 
         return resultBuilder.toString();
+    }
+
+    public int getMin() {
+        int minValue = Integer.MAX_VALUE;
+        for (Range range : histogram.keySet()) {
+            Integer count = histogram.get(range);
+            if(count < minValue)
+                minValue = count;
+        }
+        return minValue;
+    }
+
+    public int getMax() {
+        int maxValue = Integer.MIN_VALUE;
+        for (Range range : histogram.keySet()) {
+            Integer count = histogram.get(range);
+            if(maxValue < count)
+                maxValue = count;
+        }
+        return maxValue;
     }
 }
