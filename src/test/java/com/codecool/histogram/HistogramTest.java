@@ -112,4 +112,23 @@ public class HistogramTest {
 
         assertEquals(histogramString, histogram.toString());
     }
+
+
+    //getMin------------------------------------------------------
+    @Test
+    public void getMin_callingAfterGeneratingHistogram_returnsMinimumValueOfMap() {
+        Map<Range, Integer> histogramMap = histogram.generate("one two three eight forty-five seventy", ranges);
+        int min = histogram.getMin();
+        assertEquals(min, histogramMap.get(ranges.get(2)));
+    }
+
+    @Test
+    public void getMax_callingAfterGeneratingHistogram_returnsMaximumValueOfMap() {
+        Map<Range, Integer> histogramMap = histogram.generate("one two three eight forty-five seventy", ranges);
+        int min = histogram.getMax();
+        assertEquals(min, histogramMap.get(ranges.get(1)));
+    }
+
+
+
 }
